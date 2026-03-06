@@ -29,4 +29,19 @@ public class UserService {
 
     }
 
+    public UserResponse getUserByEmail(String email) {
+
+        User user = this.userRepository.findByEmail(email)
+            .orElseThrow();
+
+        return new UserResponse(
+            user.getId(),
+            user.getEmail(),
+            user.getName(),
+            user.getCreatedAt(),
+            user.getUpdatedAt()
+        );
+
+    }
+
 }

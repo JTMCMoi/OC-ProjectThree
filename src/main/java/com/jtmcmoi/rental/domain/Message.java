@@ -59,7 +59,7 @@ public class Message {
     public Instant getUpdatedAt() { return this.updatedAt; }
 
     public void setId(Integer id) { this.id = id; }
-    public void setNMessage(String message) { this.message = message; }
+    public void setMessage(String message) { this.message = message; }
     public void setRental(Rental rental) { this.rental = rental; }
     public void setUser(User user) { this.user = user; }
     public void setCreatedAt(Instant createdAt) { this.createdAt = createdAt; }

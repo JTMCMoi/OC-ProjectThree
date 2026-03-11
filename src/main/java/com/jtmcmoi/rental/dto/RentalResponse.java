@@ -1,7 +1,6 @@
 package com.jtmcmoi.rental.dto;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 
 public record RentalResponse(
     Integer id,
@@ -11,6 +10,6 @@ public record RentalResponse(
     String picture,
     String description,
     Integer ownerId,
-    Instant createdAt,
-    Instant updatedAt
+    String createdAt,
+    String updatedAt
 ) {}

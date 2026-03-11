@@ -1,5 +1,8 @@
 package com.jtmcmoi.rental.service;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Service;
 import com.jtmcmoi.rental.dto.UserResponse;
 import com.jtmcmoi.rental.repository.UserRepository;
@@ -7,6 +10,10 @@ import com.jtmcmoi.rental.domain.User;
 
 @Service
 public class UserService {
+
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter
+        .ofPattern("yyyy/MM/dd")
+        .withZone(ZoneId.systemDefault());
 
     private final UserRepository userRepository;
 
@@ -23,8 +30,8 @@ public class UserService {
             user.getId(),
             user.getEmail(),
             user.getName(),
-            user.getCreatedAt(),
-            user.getUpdatedAt()
+            DATE_FORMAT.format(user.getCreatedAt()),
+            DATE_FORMAT.format(user.getUpdatedAt())
         );
 
     }
@@ -38,8 +45,8 @@ public class UserService {
             user.getId(),
             user.getEmail(),
             user.getName(),
-            user.getCreatedAt(),
-            user.getUpdatedAt()
+            DATE_FORMAT.format(user.getCreatedAt()),
+            DATE_FORMAT.format(user.getUpdatedAt())
         );
 
     }

@@ -1,7 +1,7 @@
 package com.jtmcmoi.rental.service;
 
 import org.springframework.stereotype.Service;
-
+import com.jtmcmoi.rental.exception.BadRequestException;
 import com.jtmcmoi.rental.domain.Message;
 import com.jtmcmoi.rental.domain.Rental;
 import com.jtmcmoi.rental.domain.User;
@@ -27,10 +27,10 @@ public class MessageService {
     public void createMessage(MessageRequest request) {
 
         User user = this.userRepository.findById(request.user_id())
-            .orElseThrow();
+            .orElseThrow(() -> new BadRequestException());
 
         Rental rental = this.rentalRepository.findById(request.rental_id())
-            .orElseThrow();
+            .orElseThrow(() -> new BadRequestException());
 
         Message message = new Message();
         message.setMessage(request.message());

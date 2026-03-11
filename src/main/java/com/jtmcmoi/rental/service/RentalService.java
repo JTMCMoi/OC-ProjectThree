@@ -10,6 +10,7 @@ import com.jtmcmoi.rental.domain.Rental;
 import com.jtmcmoi.rental.dto.RentalRequest;
 import com.jtmcmoi.rental.dto.RentalResponse;
 import com.jtmcmoi.rental.dto.RentalsResponse;
+import com.jtmcmoi.rental.exception.InvalidCredentialsException;
 import com.jtmcmoi.rental.repository.RentalRepository;
 import com.jtmcmoi.rental.repository.UserRepository;
 
@@ -42,7 +43,7 @@ public class RentalService {
 
     public RentalResponse getRentalById(Integer id) {
         Rental rental = this.rentalRepository.findById(id)
-            .orElseThrow();
+            .orElseThrow(InvalidCredentialsException::new);
 
         return this.toResponse(rental);
     }
@@ -50,7 +51,7 @@ public class RentalService {
     public void postRental(RentalRequest request, MultipartFile picture, String email) {
 
         User owner = this.userRepository.findByEmail(email)
-            .orElseThrow();
+            .orElseThrow(InvalidCredentialsException::new);
 
         String url = this.pictureStorageService.storePicture(picture);
 
@@ -67,7 +68,7 @@ public class RentalService {
 
     public void putRental(Integer id, RentalRequest request) {
         Rental rental = this.rentalRepository.findById(id)
-            .orElseThrow();
+            .orElseThrow(InvalidCredentialsException::new);
 
         rental.setName(request.getName());
         rental.setSurface(request.getSurface());

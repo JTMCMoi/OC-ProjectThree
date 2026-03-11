@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Service;
 import com.jtmcmoi.rental.dto.UserResponse;
+import com.jtmcmoi.rental.exception.InvalidCredentialsException;
 import com.jtmcmoi.rental.repository.UserRepository;
 import com.jtmcmoi.rental.domain.User;
 
@@ -24,7 +25,7 @@ public class UserService {
     public UserResponse getUserById(Integer id) {
 
         User user = this.userRepository.findById(id)
-            .orElseThrow();
+            .orElseThrow(InvalidCredentialsException::new);
 
         return new UserResponse(
             user.getId(),
@@ -39,7 +40,7 @@ public class UserService {
     public UserResponse getUserByEmail(String email) {
 
         User user = this.userRepository.findByEmail(email)
-            .orElseThrow();
+            .orElseThrow(InvalidCredentialsException::new);
 
         return new UserResponse(
             user.getId(),

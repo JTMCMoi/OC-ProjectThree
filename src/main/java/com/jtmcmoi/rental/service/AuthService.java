@@ -7,6 +7,7 @@ import com.jtmcmoi.rental.domain.User;
 import com.jtmcmoi.rental.dto.AuthResponse;
 import com.jtmcmoi.rental.dto.LoginRequest;
 import com.jtmcmoi.rental.dto.RegisterRequest;
+import com.jtmcmoi.rental.exception.InvalidCredentialsException;
 import com.jtmcmoi.rental.repository.UserRepository;
 
 @Service
@@ -38,10 +39,10 @@ public class AuthService {
     public AuthResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.email())
-            .orElseThrow();
+            .orElseThrow(InvalidCredentialsException::new);
 
         if ( !passwordEncoder.matches(request.password(), user.getPassword()) ) {
-            throw new RuntimeException("Invalid credentials");
+            throw new InvalidCredentialsException();
         }
 
         return new AuthResponse(tokenService.generateToken(user.getEmail()));

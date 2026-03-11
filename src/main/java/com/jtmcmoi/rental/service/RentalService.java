@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.jtmcmoi.rental.domain.User;
 import com.jtmcmoi.rental.domain.Rental;
-import com.jtmcmoi.rental.dto.RentalPostRequest;
+import com.jtmcmoi.rental.dto.RentalRequest;
 import com.jtmcmoi.rental.dto.RentalResponse;
 import com.jtmcmoi.rental.dto.RentalsResponse;
 import com.jtmcmoi.rental.repository.RentalRepository;
@@ -40,7 +40,7 @@ public class RentalService {
         return this.toResponse(rental);
     }
 
-    public void postRental(RentalPostRequest request, MultipartFile picture, String email) {
+    public void postRental(RentalRequest request, MultipartFile picture, String email) {
 
         User owner = this.userRepository.findByEmail(email)
             .orElseThrow();
@@ -54,6 +54,18 @@ public class RentalService {
         rental.setDescription(request.getDescription());
         rental.setPicture(url);
         rental.setOwner(owner);
+
+        this.rentalRepository.save(rental);
+    }
+
+    public void putRental(Integer id, RentalRequest request) {
+        Rental rental = this.rentalRepository.findById(id)
+            .orElseThrow();
+
+        rental.setName(request.getName());
+        rental.setSurface(request.getSurface());
+        rental.setPrice(request.getPrice());
+        rental.setDescription(request.getDescription());
 
         this.rentalRepository.save(rental);
     }

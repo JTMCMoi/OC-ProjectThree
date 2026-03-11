@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-public class RentalPostRequest {
+public class RentalRequest {
 
     @NotBlank
     private String name;

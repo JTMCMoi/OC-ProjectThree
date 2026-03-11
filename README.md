@@ -144,7 +144,7 @@ Des variables d'environnement sont nécessaires au bon fonctionnement de l'API :
 - DB_URL : jdbc:mariadb://localhost:3306/INSERT_DB_NAME_HERE
 - DB_USER : INSERT_DB_USER_HERE
 - DB_PASSWORD : INSERT_DB_PASSWORD_HERE
-- JWT_SECRET : INSERT_MINIMAL_32_LENGHT_SECRET_HERE
+- JWT_SECRET : INSERT_MINIMAL_32_LENGTH_SECRET_HERE
 
 # Démarrage de l'API
 

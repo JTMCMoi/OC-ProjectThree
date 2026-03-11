@@ -2,6 +2,8 @@ package com.jtmcmoi.rental.dto;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public record RentalResponse(
     Integer id,
     String name,
@@ -9,7 +11,7 @@ public record RentalResponse(
     BigDecimal price,
     String picture,
     String description,
-    Integer ownerId,
-    String createdAt,
-    String updatedAt
+    @JsonProperty("owner_id") Integer ownerId,
+    @JsonProperty("created_at") String createdAt,
+    @JsonProperty("updated_at")String updatedAt
 ) {}

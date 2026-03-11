@@ -53,7 +53,7 @@ public class PictureStorageService {
         }
         
 
-        return "http://localhost:"+this.serverPort+"/pictures/"+uuid+this.getExtension(file.getContentType());
+        return "http://localhost:"+this.serverPort+"/picture/"+uuid+this.getExtension(file.getContentType());
     }
 
     public Path resolvePicture(String filename){

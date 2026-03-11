@@ -3,10 +3,10 @@ package com.jtmcmoi.rental.service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Set;
+import java.util.UUID;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Path;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,7 +28,9 @@ public class PictureStorageService {
         this.serverPort = serverPort;
     }
 
-    public String storePicture(MultipartFile file, Integer id) {
+    public String storePicture(MultipartFile file) {
+
+        UUID uuid = UUID.randomUUID();
 
         if ( file == null || file.isEmpty() ) {
             throw new IllegalArgumentException("Picture is required");
@@ -42,7 +44,7 @@ public class PictureStorageService {
             Files.createDirectories(this.uploadDir);
             Files.copy(
                 file.getInputStream(),
-                this.uploadDir.resolve(id+this.getExtension(file.getContentType())).normalize(),
+                this.uploadDir.resolve(uuid+this.getExtension(file.getContentType())).normalize(),
                 StandardCopyOption.REPLACE_EXISTING
             );
         }
@@ -51,7 +53,7 @@ public class PictureStorageService {
         }
         
 
-        return "http://localhost:"+this.serverPort+"/pictures/"+id+this.getExtension(file.getContentType());
+        return "http://localhost:"+this.serverPort+"/pictures/"+uuid+this.getExtension(file.getContentType());
     }
 
     public Path resolvePicture(String filename){

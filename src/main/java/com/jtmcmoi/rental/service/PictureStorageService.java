@@ -6,6 +6,8 @@ import java.util.Set;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.Path;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +21,12 @@ public class PictureStorageService {
     );
 
     private final Path uploadDir = Paths.get("./pictures").toAbsolutePath().normalize();
+
+    private final Integer serverPort;
+
+    public PictureStorageService(@Value("${server.port:8080}") int serverPort) {
+        this.serverPort = serverPort;
+    }
 
     public String storePicture(MultipartFile file, Integer id) {
 
@@ -43,7 +51,11 @@ public class PictureStorageService {
         }
         
 
-        return "";
+        return "http://localhost:"+this.serverPort+"/pictures/"+id+this.getExtension(file.getContentType());
+    }
+
+    public Path resolvePicture(String filename){
+        return this.uploadDir.resolve(filename).normalize();
     }
 
     private String getExtension(String contentType) {

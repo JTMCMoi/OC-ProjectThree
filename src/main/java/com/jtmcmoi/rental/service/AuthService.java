@@ -2,7 +2,6 @@ package com.jtmcmoi.rental.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.jtmcmoi.rental.domain.User;
 import com.jtmcmoi.rental.dto.AuthResponse;
 import com.jtmcmoi.rental.dto.LoginRequest;

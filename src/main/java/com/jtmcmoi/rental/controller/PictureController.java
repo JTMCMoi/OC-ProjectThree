@@ -2,7 +2,6 @@ package com.jtmcmoi.rental.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import com.jtmcmoi.rental.service.PictureStorageService;
-
 import java.net.MalformedURLException;
 import java.nio.file.Path;
 import org.springframework.core.io.Resource;
@@ -10,7 +9,6 @@ import org.springframework.core.io.UrlResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 
 @RestController
 public class PictureController {

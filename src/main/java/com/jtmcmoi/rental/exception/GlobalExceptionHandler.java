@@ -17,8 +17,6 @@ public class GlobalExceptionHandler {
         HttpServletRequest request
     ) {
 
-        String path = request.getRequestURI();
-
         if ( "/api/auth/register".equals(request.getRequestURI()) ) {
             return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
